@@ -13,32 +13,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerhusen.security.rest.dto.LoginDto;
 import org.zerhusen.security.jwt.JWTFilter;
 import org.zerhusen.security.jwt.TokenProvider;
+import org.zerhusen.security.rest.dto.LoginDto;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @Slf4j
 @RestController
 @RequestMapping("/api")
 public class AuthenticationRestController {
-
-   private final TokenProvider tokenProvider;
-
-   private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-   public AuthenticationRestController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
-      this.tokenProvider = tokenProvider;
-      this.authenticationManagerBuilder = authenticationManagerBuilder;
-   }
+   @Resource
+   TokenProvider tokenProvider;
+   @Resource
+   AuthenticationManagerBuilder authenticationManagerBuilder;
 
    @PostMapping("/authenticate")
    public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginDto loginDto) {
-
       UsernamePasswordAuthenticationToken authenticationToken =
          new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
-
       Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
       SecurityContextHolder.getContext().setAuthentication(authentication);
 

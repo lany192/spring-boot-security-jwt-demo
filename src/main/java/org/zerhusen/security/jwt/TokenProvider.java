@@ -24,13 +24,10 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider implements InitializingBean {
    private static final String AUTHORITIES_KEY = "auth";
-
    private final String base64Secret;
    private final long tokenValidityInMilliseconds;
    private final long tokenValidityInMillisecondsForRememberMe;
-
    private Key key;
-
 
    public TokenProvider(
       @Value("${jwt.base64-secret}") String base64Secret,
