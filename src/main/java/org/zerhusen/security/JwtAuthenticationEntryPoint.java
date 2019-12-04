@@ -22,12 +22,12 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
       // This is invoked when user tries to access a secured REST resource without supplying any credentials
       // We should just send a 401 Unauthorized response because there is no 'login page' to redirect to
       // Here you can place any message you want
-//      response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+      response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
 
       log.info("错误401，访问" + request.getRequestURI() + "访问失败，" + authException.getMessage());
-      Result result = new Result();
-      result.setCode(401);
-      result.setMsg("权限不足！");
-      ResponseUtils.result(response, result);
+//      Result result = new Result();
+//      result.setCode(401);
+//      result.setMsg("权限不足！");
+//      ResponseUtils.result(response, result);
    }
 }

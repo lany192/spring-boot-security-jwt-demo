@@ -15,7 +15,7 @@ public class PersonRestController {
       Result result = new Result();
       result.setCode(200);
       result.setMsg("请求成功！");
-      result.setData(new Person("John Doe", "john.doe@test.org"));
+      result.setData(new Person("John Doe1", "john.doe@test.org"));
       return result;
    }
 }

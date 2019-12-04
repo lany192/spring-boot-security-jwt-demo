@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zerhusen.eniity.Result;
 import org.zerhusen.security.jwt.JWTFilter;
 import org.zerhusen.security.jwt.TokenProvider;
 import org.zerhusen.security.rest.dto.LoginDto;
@@ -30,7 +31,7 @@ public class AuthenticationRestController {
    AuthenticationManagerBuilder authenticationManagerBuilder;
 
    @PostMapping("/authenticate")
-   public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginDto loginDto) {
+   public Result authorize(@Valid @RequestBody LoginDto loginDto) {
       UsernamePasswordAuthenticationToken authenticationToken =
          new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
       Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
@@ -42,7 +43,12 @@ public class AuthenticationRestController {
       HttpHeaders httpHeaders = new HttpHeaders();
       httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-      return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+      Result result = new Result();
+      result.setCode(200);
+      result.setMsg("请求成功！");
+      result.setData(jwt);
+
+      return result;
    }
 
    /**
