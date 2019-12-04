@@ -17,35 +17,24 @@ import org.zerhusen.security.JwtAuthenticationEntryPoint;
 import org.zerhusen.security.jwt.JWTConfigurer;
 import org.zerhusen.security.jwt.TokenProvider;
 
+import javax.annotation.Resource;
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-   private final TokenProvider tokenProvider;
-   private final CorsFilter corsFilter;
-   private final JwtAuthenticationEntryPoint authenticationErrorHandler;
-   private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-
-   public WebSecurityConfig(
-      TokenProvider tokenProvider,
-      CorsFilter corsFilter,
-      JwtAuthenticationEntryPoint authenticationErrorHandler,
-      JwtAccessDeniedHandler jwtAccessDeniedHandler
-   ) {
-      this.tokenProvider = tokenProvider;
-      this.corsFilter = corsFilter;
-      this.authenticationErrorHandler = authenticationErrorHandler;
-      this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-   }
-
-   // Configure BCrypt password encoder =====================================================================
+   @Resource
+   TokenProvider tokenProvider;
+   @Resource
+   CorsFilter corsFilter;
+   @Resource
+   JwtAuthenticationEntryPoint authenticationErrorHandler;
+   @Resource
+   JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
    @Bean
    public PasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
    }
-
-   // Configure paths and requests that should be ignored by Spring Security ================================
 
    @Override
    public void configure(WebSecurity web) {
@@ -63,8 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/h2-console/**"
          );
    }
-
-   // Configure security settings ===========================================================================
 
    @Override
    protected void configure(HttpSecurity httpSecurity) throws Exception {
