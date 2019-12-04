@@ -1,6 +1,7 @@
 package org.zerhusen.security.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,7 @@ import org.zerhusen.security.jwt.TokenProvider;
 
 import javax.validation.Valid;
 
-/**
- * Controller to authenticate users.
- */
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class AuthenticationRestController {
@@ -43,7 +42,7 @@ public class AuthenticationRestController {
       Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
       SecurityContextHolder.getContext().setAuthentication(authentication);
 
-      boolean rememberMe = (loginDto.isRememberMe() == null) ? false : loginDto.isRememberMe();
+      boolean rememberMe = (loginDto.getRememberMe() == null) ? false : loginDto.getRememberMe();
       String jwt = tokenProvider.createToken(authentication, rememberMe);
 
       HttpHeaders httpHeaders = new HttpHeaders();

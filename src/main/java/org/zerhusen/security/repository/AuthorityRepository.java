@@ -1,7 +1,8 @@
 package org.zerhusen.security.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.zerhusen.security.model.Authority;
+import org.zerhusen.eniity.Authority;
 
 /**
  * Spring Data JPA repository for the {@link Authority} entity.

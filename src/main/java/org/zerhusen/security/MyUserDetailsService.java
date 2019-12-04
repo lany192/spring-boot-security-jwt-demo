@@ -1,5 +1,6 @@
 package org.zerhusen.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,24 +11,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.zerhusen.security.model.User;
+import org.zerhusen.eniity.User;
 import org.zerhusen.security.repository.UserRepository;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-/**
- * Authenticate a user from the database.
- */
+@Slf4j
 @Component("userDetailsService")
-public class UserModelDetailsService implements UserDetailsService {
-
-   private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
-
+public class MyUserDetailsService implements UserDetailsService {
    private final UserRepository userRepository;
 
-   public UserModelDetailsService(UserRepository userRepository) {
+   public MyUserDetailsService(UserRepository userRepository) {
       this.userRepository = userRepository;
    }
 

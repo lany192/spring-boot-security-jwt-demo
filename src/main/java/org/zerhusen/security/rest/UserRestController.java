@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerhusen.security.model.User;
+import org.zerhusen.eniity.User;
 import org.zerhusen.security.service.UserService;
 
 @RestController

@@ -2,7 +2,7 @@ package org.zerhusen.security.repository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.zerhusen.security.model.User;
+import org.zerhusen.eniity.User;
 
 import java.util.Optional;
 
